@@ -89,8 +89,15 @@ client.on('message', async msg => {
         {
           if (admins.isAdmin)
           {
-            exec(`start "${config.exegtps}"`)
+            if (fs.existsSync(config.exegtps))
+            {
+              exec(`start "${config.exegtps}"`)
             return msg.reply("the server has been started!")
+            }
+            else
+            {
+              msg.reply("Where's the exe? did you set the config.json?")
+            }
           }
           else
           {
@@ -109,6 +116,10 @@ client.on('message', async msg => {
         {
           return msg.reply("Sorry, you don't have permissions to use this!")
         }
+      }
+      if (command === "about")
+      {
+        return msg.getChat(msg.from, "This bot can Control this GTPS Using WhatsApp, so, you can Control your GTPS using WhatsApp\nThis bot is Created by GuckTubeYT")
       }
     }
     else
